@@ -10,7 +10,10 @@ import com.times.jinsta.payload.request.LoginRequest;
 import com.times.jinsta.payload.request.SignUpRequest;
 import com.times.jinsta.repository.RoleRepository;
 import com.times.jinsta.repository.UserRepository;
+import com.times.jinsta.security.JwtAuthenticationEntryPoint;
 import com.times.jinsta.security.JwtTokenProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +36,8 @@ import java.util.Collections;
 @RequestMapping("/api/auth")
 public class AuthController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
     @Autowired
     AuthenticationManager authenticationManager;
 
@@ -50,7 +55,6 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest){
-
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsernameOrEmail(), loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -78,9 +82,10 @@ public class AuthController {
                         .orElseThrow(() -> new AppException("User Role not set"));
         user.setRoles(Collections.singleton(userRole));
         User result = userRepository.save(user);
+        // localhost:8000/api/user/{username}
         URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/users/{username}")
                         .buildAndExpand(result.getUsername()).toUri();
-
+        // created에 넣어주면 header에 Location=uri 정보가 들어간다
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
 }

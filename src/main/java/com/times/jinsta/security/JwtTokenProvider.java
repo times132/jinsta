@@ -20,22 +20,29 @@ public class JwtTokenProvider {
     @Value("${app.jwtExpirationInMs}")
     private int jwtExpirationInMs;
 
+    //토큰 생성
     public String generateToken(Authentication authentication){
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
 
-        return Jwts.builder().setSubject(Long.toString(userPrincipal.getId())).setIssuedAt(new Date())
-                    .setExpiration(expiryDate).signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
+        return Jwts.builder()
+                    .setSubject(Long.toString(userPrincipal.getId())) //데이터
+                    .setIssuedAt(new Date()) // 발행일자
+                    .setExpiration(expiryDate) // 유효 시간
+                    .signWith(SignatureAlgorithm.HS512, jwtSecret) //암호화 알고리즘
+                    .compact();
     }
 
+    // 토큰에서 정보 추출
     public Long getUserIdFromJWT(String token){
         Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
 
         return Long.parseLong(claims.getSubject());
     }
 
+    // 토큰의 유효성 확인
     public boolean validateToken(String authToken){
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);

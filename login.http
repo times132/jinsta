@@ -1,0 +1,31 @@
+POST localhost:8000/api/auth/signup
+Content-Type: application/json
+
+{
+  "name": "times1",
+  "username": "times1",
+  "email": "times1@naver.com",
+  "password": "123456"
+}
+
+###
+
+POST localhost:8000/api/auth/signin
+Content-Type: application/json
+
+{
+  "usernameOrEmail": "times1",
+  "password": "123456"
+}
+
+###
+
+POST localhost:8000/api/auth/signin
+Content-Type: application/json
+
+{
+  "usernameOrEmail": "test1",
+  "password": "123456"
+}
+
+###

@@ -42,8 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Override
-    protected AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager();
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Bean
@@ -53,14 +53,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-                        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-                        .antMatchers("/", "/favicon.ico", "/**/*.png", "/**/*.svg", "/**/*.jpg", "/**/*.html",
-                                        "/**/*.css", "/**/*.js")
-                        .permitAll().antMatchers("/api/auth/**").permitAll()
-                        .antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability").permitAll()
-                        .antMatchers(HttpMethod.GET, "/api/polls/**", "/api/users/**").permitAll().anyRequest().authenticated();
+        http.cors()
+                .and().csrf().disable() //rest api이므로 csrf 보안 disable
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Jwt token 인증 방식이므로 session 생성 하지 않음
+                .and().authorizeRequests()
+                    .antMatchers("/", "/favicon.ico", "/**/*.png", "/**/*.svg", "/**/*.jpg", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
+                    .antMatchers("/api/auth/**").permitAll()
+                    .antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability").permitAll()
+                    .antMatchers(HttpMethod.GET, "/api/polls/**", "/api/users/**").permitAll() //get 방식으로 접근 가능
+                .anyRequest().authenticated(); // 나머지 요청은 인증되어야함
 
+        // Jwt 토큰이 유효한 토큰인지 먼저 확인하는 필터를 id/password 필터 앞에 넣음
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }

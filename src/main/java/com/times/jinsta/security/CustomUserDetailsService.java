@@ -10,12 +10,14 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+// DB에서 유저 정보를 가져오는 역할
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
 
+    // email 또는 username으로 유저 정보를 가져와서 UserDetails으로 리턴
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {

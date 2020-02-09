@@ -34,7 +34,7 @@
     -ms-flex-pack: center;
     justify-content: center;
     max-width: 975px;
-    padding: 26px 20px;
+    padding: 0 20px;
     -webkit-transition: height .2s ease-in-out;
     transition: height .2s ease-in-out;
     width: 100%
@@ -48,11 +48,15 @@
     min-width: 40px;
     display: flex;
 }
+.jOuez{
+    display: flex;
+    margin: auto;
+}
 
 .SvO5t {
     background-color: #262626;
     height: 28px;
-    margin: 0 16px;
+    margin: auto 16px;
     -webkit-transition: opacity .1s ease-out;
     transition: opacity .1s ease-out;
     width: 1px;
@@ -68,11 +72,6 @@
     }
 }
 
-._8-yf5 {
-    display: block;
-    position: relative;
-}
-
 .s4Iyt {
     max-height: 100%;
     max-width: 100%;
@@ -82,7 +81,6 @@
 
 .search {
     position: absolute;
-    border: 1px solid lightgray;
     border-radius: 4px;
 }@media (max-width:650px) {
     .search {
@@ -108,30 +106,6 @@
 .inputRoot{
     width: 80%;
     float: right;
-}
-
-.app-menu {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-}
-.app-menu .tdiEy {
-    font-size: 14px;
-    margin-left: 15px;
-}@media (max-width: 768px) {
-    .app-title a {
-        font-size: 20px;
-    }
-
-    .app-menu > li {
-        padding: 0 15px;
-    }
-
-    .app-menu > li > a {
-        padding: 0 15px;
-        margin: 0 -15px;
-    }
 }
 
 .linkRoot {
@@ -168,4 +142,10 @@
 
 .poll-icon {
     margin-top: -4px;
+}
+
+._8-yf5{
+    display: block;
+    position: relative;
+    margin: auto;
 }

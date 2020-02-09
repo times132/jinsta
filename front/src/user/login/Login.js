@@ -96,7 +96,7 @@ class LoginForm extends React.Component{
                         </div>
                     </div>
                     <div className="gr27e">
-                        <p className="izU2O">계정이 없으신가요? <Link to="/">가입하기</Link></p>
+                        <p className="izU2O">계정이 없으신가요? <Link to="/signup">가입하기</Link></p>
                     </div>
                 </div>
             </article>

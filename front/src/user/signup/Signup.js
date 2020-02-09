@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { signup, checkUsernameAvailability, checkEmailAvailability } from '../../util/APIUtils';
 import './Signup.css';
 import appsample2 from "../../picture/app-sample2.jpg"
@@ -10,10 +10,10 @@ import {
     PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH
 } from '../../constants';
 
-import { Form, Input, Button, notification } from 'antd';
+import { Form, Input, notification, Button } from 'antd';
 const FormItem = Form.Item;
 
-class Signup extends Component {
+class Signup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -165,7 +165,7 @@ class Signup extends Component {
                         </div>
                     </div>
                     <div className="login-link">
-                        <p className="izU2O">계정이 있으신가요? <Link to="/login">로그인</Link></p>
+                        <p className="izU2O">계정이 있으신가요? <Link to="/signin">로그인</Link></p>
                     </div>
                     <div className="app-link">
 

@@ -33,7 +33,7 @@ import java.net.URI;
 import java.util.Collections;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
@@ -66,7 +66,6 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest){
-
         if (userRepository.existsByUsername(signUpRequest.getUsername())){
             return new ResponseEntity<>(new ApiResponse(false, "Username is already taken"), HttpStatus.BAD_REQUEST);
         }
@@ -83,7 +82,7 @@ public class AuthController {
         user.setRoles(Collections.singleton(userRole));
         User result = userRepository.save(user);
         // localhost:8000/api/user/{username}
-        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/users/{username}")
+        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/users/{username}")
                         .buildAndExpand(result.getUsername()).toUri();
         // created에 넣어주면 header에 Location=uri 정보가 들어간다
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));

@@ -59,9 +59,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Jwt token 인증 방식이므로 session 생성 하지 않음
                 .and().authorizeRequests()
                     .antMatchers("/", "/favicon.ico", "/**/*.png", "/**/*.svg", "/**/*.jpg", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
-                    .antMatchers("/api/auth/**").permitAll()
-                    .antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability").permitAll()
-                    .antMatchers(HttpMethod.GET, "/api/polls/**", "/api/users/**").permitAll() //get 방식으로 접근 가능
+                    .antMatchers("/auth/**").permitAll()
+                    .antMatchers("/user/checkUsernameAvailability", "/user/checkEmailAvailability").permitAll()
+                    .antMatchers(HttpMethod.GET, "/polls/**", "/users/**").permitAll() //get 방식으로 접근 가능
                 .anyRequest().authenticated(); // 나머지 요청은 인증되어야함
 
         // Jwt 토큰이 유효한 토큰인지 먼저 확인하는 필터를 id/password 필터 앞에 넣음

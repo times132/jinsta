@@ -16,7 +16,7 @@ public class JwtTokenProvider {
 
     @Value("${app.jwtSecret}")
     private String jwtSecret;
-
+    // 토큰 5분
     @Value("${app.jwtExpirationInMs}")
     private int jwtExpirationInMs;
 
@@ -28,14 +28,14 @@ public class JwtTokenProvider {
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
 
         return Jwts.builder()
-                    .setSubject(Long.toString(userPrincipal.getId())) //데이터
+                    .setSubject(Long.toString(userPrincipal.getId())) //데이터 userid만
                     .setIssuedAt(new Date()) // 발행일자
                     .setExpiration(expiryDate) // 유효 시간
                     .signWith(SignatureAlgorithm.HS512, jwtSecret) //암호화 알고리즘
                     .compact();
     }
 
-    // 토큰에서 정보 추출
+    // 토큰에서 정보 추출(userid 추출)
     public Long getUserIdFromJWT(String token){
         Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
 

@@ -1,11 +1,14 @@
 package com.times.jinsta.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 
-@Data
+@Setter
+@Getter
 @Entity
 @Table(name = "roles")
 public class Role {

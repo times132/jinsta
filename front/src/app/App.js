@@ -5,6 +5,7 @@ import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import { getCurrentUser } from "../util/APIUtils";
 import { ACCESS_TOKEN } from "../constants";
 
+import Profile from "../user/profile/Profile";
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
 import Home from '../user/Home';
@@ -40,19 +41,14 @@ class App extends React.Component{
                     isAuthenticated: true,
                     isLoading: false
                 });
-                console.log("success");
-                console.log("isAuth is: "+this.state.isAuthenticated);
+                console.log("currentuser");
             }).catch(error => {
                 this.setState({
                     isLoading: false
                 });
-                console.log("error");
+                console.log("not currentuser");
         });
 
-    }
-
-    componentDidMount() {
-        this.loadCurrentUser();
     }
 
     handleLogout(redirectTo="/", notificationType="success", description="You're successfully logged out."){
@@ -81,30 +77,39 @@ class App extends React.Component{
         this.props.history.push("/");
     }
 
+    componentDidMount() {
+        console.log("componentDidMount");
+        this.loadCurrentUser();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const loggedInfo = localStorage.getItem(ACCESS_TOKEN);
+        console.log("loggedInfo : ", loggedInfo);
+    }
+
     render() {
         let re = /(signin|signup)/;
         let isAuth = re.test(this.props.location.pathname);
-        let checkAuth = this.state.isAuthenticated;
-
+        console.log("render");
         if (this.state.isLoading){
             return <LoadingIndicator/>
         }
         return (
             <Layout className="app-container">
-                <div className="appheader">
+                <div className="appheader"> {/* 로그인, 회원가입에는 AppHeader 비활성화 */}
                     {isAuth ? undefined : <AppHeader
                         isAuthenticated={this.state.isAuthenticated}
                         currentUser={this.state.currentUser}
                         onLogout={this.handleLogout}/>}
                 </div>
 
-
                 <Content className="app-content">
                     <div className="container">
                         <Switch>
-                            <Route exact path="/" render={(props) => <Home isLogin={checkAuth} {...props}/>}/>
+                            <Route exact path="/" render={(props) => <Home isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} handleLogout={this.handleLogout} {...props}/>}/>
                             <Route path="/signin" render={(props) => <Login onLogin={this.handleLogin} {...props} />}/>
                             <Route path="/signup" component={Signup}/>
+                            <Route path="/:username" render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}/>}/>
                         </Switch>
                     </div>
                 </Content>

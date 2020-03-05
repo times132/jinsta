@@ -2,6 +2,7 @@ package com.times.jinsta.security;
 
 import com.times.jinsta.model.User;
 import com.times.jinsta.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,9 +13,9 @@ import javax.transaction.Transactional;
 
 // DB에서 유저 정보를 가져오는 역할
 @Service
+@AllArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-    @Autowired
     UserRepository userRepository;
 
     // email 또는 username으로 유저 정보를 가져와서 UserDetails으로 리턴

@@ -1,5 +1,6 @@
 package com.times.jinsta.controller;
 
+import com.times.jinsta.payload.response.UserProfile;
 import com.times.jinsta.payload.response.UserSummary;
 import com.times.jinsta.repository.UserRepository;
 import com.times.jinsta.security.CurrentUser;
@@ -27,5 +28,10 @@ public class UserController {
         UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
 
         return userSummary;
+    }
+
+    @GetMapping("/{username}")
+    public UserProfile getUserProfile(){
+        return null;
     }
 }

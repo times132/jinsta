@@ -12,6 +12,7 @@ import com.times.jinsta.repository.RoleRepository;
 import com.times.jinsta.repository.UserRepository;
 import com.times.jinsta.security.JwtAuthenticationEntryPoint;
 import com.times.jinsta.security.JwtTokenProvider;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,23 +35,15 @@ import java.util.Collections;
 
 @RestController
 @RequestMapping("/auth")
+@AllArgsConstructor
 public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
-    @Autowired
     AuthenticationManager authenticationManager;
-
-    @Autowired
     UserRepository userRepository;
-
-    @Autowired
     RoleRepository roleRepository;
-
-    @Autowired
     PasswordEncoder passwordEncoder;
-
-    @Autowired
     JwtTokenProvider tokenProvider;
 
     @PostMapping("/signin")

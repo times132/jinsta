@@ -33,22 +33,6 @@ export function getAllPolls(page, size) {
     });
 }
 
-export function createPoll(pollData) {
-    return request({
-        url: API_BASE_URL + "/polls",
-        method: 'POST',
-        body: JSON.stringify(pollData)
-    });
-}
-
-export function castVote(voteData) {
-    return request({
-        url: API_BASE_URL + "/polls/" + voteData.pollId + "/votes",
-        method: 'POST',
-        body: JSON.stringify(voteData)
-    });
-}
-
 export function login(loginRequest) {
     return request({
         url: API_BASE_URL + "/auth/signin",
@@ -78,7 +62,6 @@ export function checkEmailAvailability(email) {
         method: 'GET'
     });
 }
-
 
 export function getCurrentUser() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {

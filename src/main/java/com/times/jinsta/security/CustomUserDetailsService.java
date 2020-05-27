@@ -16,7 +16,7 @@ import javax.transaction.Transactional;
 @AllArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     // email 또는 username으로 유저 정보를 가져와서 UserDetails으로 리턴
     @Override

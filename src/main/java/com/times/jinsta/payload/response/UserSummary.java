@@ -1,5 +1,6 @@
 package com.times.jinsta.payload.response;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ public class UserSummary {
     private String username;
     private String name;
 
+    @Builder
     public UserSummary(Long id, String username, String name){
         this.id = id;
         this.username = username;

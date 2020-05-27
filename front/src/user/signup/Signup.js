@@ -30,14 +30,9 @@ class Signup extends React.Component {
                 value: ''
             }
         }
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.validateUsernameAvailability = this.validateUsernameAvailability.bind(this);
-        this.validateEmailAvailability = this.validateEmailAvailability.bind(this);
-        this.isFormInvalid = this.isFormInvalid.bind(this);
     }
 
-    handleInputChange(event, validationFun) {
+    handleInputChange = (event, validationFun) => {
         const target = event.target;
         const inputName = target.name;
         const inputValue = target.value;
@@ -50,7 +45,7 @@ class Signup extends React.Component {
         });
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
 
         const signupRequest = {
@@ -74,7 +69,7 @@ class Signup extends React.Component {
         });
     }
 
-    isFormInvalid() {
+    isFormInvalid = () => {
         return !(this.state.name.validateStatus === 'success' &&
             this.state.username.validateStatus === 'success' &&
             this.state.email.validateStatus === 'success' &&
@@ -244,7 +239,7 @@ class Signup extends React.Component {
         }
     }
 
-    validateUsernameAvailability() {
+    validateUsernameAvailability = () => {
         // First check for client side errors in username
         const usernameValue = this.state.username.value;
         const usernameValidation = this.validateUsername(usernameValue);
@@ -298,11 +293,11 @@ class Signup extends React.Component {
         });
     }
 
-    validateEmailAvailability() {
+    validateEmailAvailability = () => {
         // First check for client side errors in email
         const emailValue = this.state.email.value;
         const emailValidation = this.validateEmail(emailValue);
-
+        console.log(this.state.email)
         if(emailValidation.validateStatus === 'error') {
             this.setState({
                 email: {

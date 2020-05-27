@@ -18,16 +18,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 // Jwt가 유효한 토큰인지 인증을 위한 filter
+@AllArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    @Autowired
     private JwtTokenProvider tokenProvider;
-    @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
-    // request로 들어오는 Jwt Token의 유효성을 검증
+    // request 들어오는 Jwt Token의 유효성을 검증
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {

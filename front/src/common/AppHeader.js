@@ -14,10 +14,9 @@ const menustyle = {
 class AppHeader extends React.Component{
     constructor(props){
         super(props);
-        this.handleMenuClick = this.handleMenuClick.bind(this);
     }
 
-    handleMenuClick({key}){
+    handleMenuClick= ({key}) => {
         if (key === "logout"){
             this.props.onLogout();
         }
@@ -48,8 +47,8 @@ class AppHeader extends React.Component{
                         </svg>
                     </Link>
                     {/*<ProfileDropdownMenu*/}
-                        {/*currentUser={this.props.currentUser}*/}
-                        {/*handleMenuClick={this.handleMenuClick}/>*/}
+                    {/*    currentUser={this.props.currentUser}*/}
+                    {/*    handleMenuClick={this.handleMenuClick}/>*/}
                 </Menu.Item>
             ];
         }else{

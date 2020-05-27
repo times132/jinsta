@@ -18,6 +18,7 @@ const { Content } = Layout;
 
 class App extends React.Component{
     constructor(props){
+        console.log("App constructor")
         super(props);
         this.state = {
             currentUser: null,
@@ -41,14 +42,11 @@ class App extends React.Component{
                     isAuthenticated: true,
                     isLoading: false
                 });
-                console.log("currentuser");
             }).catch(error => {
-                this.setState({
-                    isLoading: false
-                });
-                console.log("not currentuser");
+            this.setState({
+                isLoading: false
+            });
         });
-
     }
 
     handleLogout(redirectTo="/", notificationType="success", description="You're successfully logged out."){
@@ -78,13 +76,13 @@ class App extends React.Component{
     }
 
     componentDidMount() {
-        console.log("componentDidMount");
+        console.log("App componentDidMount");
         this.loadCurrentUser();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log("App componentDidUpdate");
         const loggedInfo = localStorage.getItem(ACCESS_TOKEN);
-        console.log("loggedInfo : ", loggedInfo);
     }
 
     render() {

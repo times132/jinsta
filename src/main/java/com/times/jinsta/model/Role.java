@@ -7,7 +7,6 @@ import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 
-@Setter
 @Getter
 @Entity
 @Table(name = "roles")

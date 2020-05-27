@@ -1,5 +1,6 @@
 package com.times.jinsta.payload.response;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 

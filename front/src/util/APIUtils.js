@@ -23,16 +23,6 @@ const request = (options) => {
         );
 };
 
-export function getAllPolls(page, size) {
-    page = page || 0;
-    size = size || POLL_LIST_SIZE;
-
-    return request({
-        url: API_BASE_URL + "/polls?page=" + page + "&size=" + size,
-        method: 'GET'
-    });
-}
-
 export function login(loginRequest) {
     return request({
         url: API_BASE_URL + "/auth/signin",
@@ -69,14 +59,14 @@ export function getCurrentUser() {
     }
 
     return request({
-        url: API_BASE_URL + "/api/user/me",
+        url: API_BASE_URL + "/user/me",
         method: 'GET'
     });
 }
 
 export function getUserProfile(username) {
     return request({
-        url: API_BASE_URL + "/users/" + username,
+        url: API_BASE_URL + "/user/" + username,
         method: 'GET'
     });
 }
